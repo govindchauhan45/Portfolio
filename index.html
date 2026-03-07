@@ -1,0 +1,108 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <link rel="icon" type="image/svg+xml" href="/vite.svg" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GOVIND CHAUHAN | PORTFOLIO</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@300;400;600;700&display=swap" rel="stylesheet">
+  <style>
+    /* Hacker-style full-screen loader (boot sequence) */
+    #hacker-loader{
+      position:fixed;inset:0;background:#000;display:flex;align-items:center;justify-content:center;z-index:9999;transition:opacity .6s ease,visibility .6s ease;
+      -webkit-font-smoothing:antialiased;text-rendering:optimizeLegibility;
+    }
+    #hacker-loader.fade-out{opacity:0;pointer-events:none;visibility:hidden}
+    #hacker-loader .terminal{
+      color:#00ff9c;font-family:"SFMono-Regular",Menlo,Monaco,Consolas,"Courier New",monospace;font-size:1.05rem;line-height:1.4;text-align:left;
+      white-space:pre-wrap;letter-spacing:0.6px;padding:8px 16px;background:rgba(0,0,0,0.45);border-radius:6px;border:1px solid rgba(0,255,156,0.04)
+    }
+    #hacker-loader .line{min-height:1.4em}
+    /* cursor is visible only on active line */
+    #hacker-loader .cursor{display:inline-block;margin-left:8px;color:#00ff9c;opacity:0.4}
+    #hacker-loader .cursor.active{opacity:1;animation:blink 1s steps(1) infinite}
+    @keyframes blink{50%{opacity:0}}
+    /* Make sure main content sits beneath loader */
+    #root{position:relative;z-index:0}
+  </style>
+</head>
+
+<body>
+  <!-- Hacker-style loading overlay -->
+  <div id="hacker-loader" role="status" aria-live="polite">
+    <div class="terminal" aria-hidden="false">
+      <div class="line"><span class="text"></span><span class="cursor">▌</span></div>
+      <div class="line"><span class="text"></span><span class="cursor">▌</span></div>
+      <div class="line"><span class="text"></span><span class="cursor">▌</span></div>
+      <div class="line"><span class="text"></span><span class="cursor">▌</span></div>
+      <div class="line"><span class="text"></span><span class="cursor">▌</span></div>
+    </div>
+  </div>
+  <div id="root" aria-hidden="true"></div>
+
+  <script>
+    (function(){
+      const lines = [
+        'INITIALIZING DATA PIPELINE...',
+        'LOADING MACHINE LEARNING MODELS...',
+        'CONNECTING TO DATA CLUSTERS...',
+        'STARTING AI SYSTEM...',
+        'PORTFOLIO READY'
+      ];
+
+      const loader = document.getElementById('hacker-loader');
+      const textSpans = Array.from(loader.querySelectorAll('.line .text'));
+      const cursors = Array.from(loader.querySelectorAll('.line .cursor'));
+
+      let lineIndex = 0, charIndex = 0;
+      const charDelay = 32; // ms per character
+      const linePause = 160; // pause between lines
+      const initialDelay = 120;
+
+      function setActiveCursor(i){
+        cursors.forEach((c, idx) => c.classList.toggle('active', idx === i));
+      }
+
+      function typeChar(){
+        if(lineIndex >= lines.length) return;
+        setActiveCursor(lineIndex);
+        const current = lines[lineIndex];
+        if(charIndex < current.length){
+          textSpans[lineIndex].textContent += current[charIndex++];
+          setTimeout(typeChar, charDelay + (Math.random()*8 - 4));
+        } else {
+          // finish this line
+          lineIndex++; charIndex = 0;
+          if(lineIndex < lines.length) setTimeout(typeChar, linePause);
+          else setActiveCursor(-1);
+        }
+      }
+
+      // start typing as soon as possible
+      document.addEventListener('DOMContentLoaded', () => {
+        setTimeout(typeChar, initialDelay);
+      });
+
+      // compute an appropriate time to hide the loader after typing finishes
+      const totalChars = lines.reduce((s, l) => s + l.length, 0);
+      const estimatedMs = initialDelay + totalChars * charDelay + (lines.length - 1) * linePause + 600;
+
+      setTimeout(()=>{
+        if(!loader) return;
+        loader.classList.add('fade-out');
+        const root = document.getElementById('root');
+        if(root) root.removeAttribute('aria-hidden');
+        setTimeout(()=>{ if(loader.parentNode) loader.parentNode.removeChild(loader); }, 700);
+      }, estimatedMs);
+    })();
+  </script>
+
+  <!-- tsParticles (loaded via CDN to avoid adding npm deps) -->
+  <script src="https://cdn.jsdelivr.net/npm/tsparticles@2.11.1/tsparticles.bundle.min.js"></script>
+  <script type="module" src="/src/main.tsx"></script>
+</body>
+
+</html>
