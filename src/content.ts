@@ -14,17 +14,11 @@ export const personalInfo = {
 
 
 export const projects = [
-  {
-    title: "TEXT-TO-SPEECH GENERATOR",
-    description: "AI based text-to-speech generator using HuggingFace Transformers to convert written text into natural sounding speech.",
-    tech: ["Python", "HuggingFace", "Transformers"],
-    github: "https://github.com/govindchauhan45/Text-To-Speech-Generator"
-  },
  {
     title: "MOVIE RECOMMENDATION SYSTEM",
     description: "Recommendation engine that suggests movies using collaborative filtering techniques such as SVD and ALS.",
     tech: ["Python", "Scikit-learn", "NumPy", "Matplotlib"],
-    github: "https://github.com/govindchauhan45/Recommendation-System-In-Python"
+    github: "https://github.com/govindchauhan45/Movie-Recommendation-System"
   },
   {
     title: "AI STUDY PLANNER",
@@ -37,6 +31,12 @@ export const projects = [
     description: "A predictive system that forecasts weather conditions using machine learning models trained on historical weather data.",
     tech: ["Python", "Scikit-learn", "Pandas", "NumPy"],
     github: "https://github.com/govindchauhan45/Weather-Forecasting-System"
+  },
+  {
+    title: "TEXT-TO-SPEECH GENERATOR",
+    description: "AI based text-to-speech generator using HuggingFace Transformers to convert written text into natural sounding speech.",
+    tech: ["Python", "HuggingFace", "Transformers"],
+    github: "https://github.com/govindchauhan45/Text-To-Speech-Generator"
   },
 
   {
